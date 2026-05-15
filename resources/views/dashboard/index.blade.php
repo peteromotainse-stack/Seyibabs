@@ -4,6 +4,7 @@
 
 @section('content')
 <div class="space-y-8 fade-in">
+
     <div class="glass rounded-3xl p-8 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-indigo-600/10 to-fuchsia-600/5 pointer-events-none"></div>
         <div class="relative flex items-center justify-between flex-wrap gap-4">
@@ -17,21 +18,13 @@
                             Elite Member
                         </span>
                     @else
-                        <a href="{{ route('membership.index') }}" class="inline-flex items-center gap-1.5 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-full px-3 py-1 text-xs font-bold hover:bg-amber-500/20 transition-colors">
-                            Upgrade to Elite →
-                        </a>
+                        <a href="{{ route('membership.index') }}" class="inline-flex items-center gap-1.5 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-full px-3 py-1 text-xs font-bold hover:bg-amber-500/20 transition-colors">Upgrade to Elite →</a>
                     @endif
                 </p>
             </div>
             <div class="flex gap-3">
-                <a href="{{ route('campaigns.index') }}" class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-3 rounded-xl text-sm font-bold transition-all shadow-lg shadow-indigo-600/20">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    Earn Now
-                </a>
-                <a href="{{ route('campaigns.create') }}" class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-200 px-5 py-3 rounded-xl text-sm font-bold transition-all border border-slate-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                    New Campaign
-                </a>
+                <a href="{{ route('campaigns.index') }}" class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-3 rounded-xl text-sm font-bold transition-all shadow-lg shadow-indigo-600/20">Earn Now</a>
+                <a href="{{ route('campaigns.create') }}" class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-200 px-5 py-3 rounded-xl text-sm font-bold transition-all border border-slate-700">New Campaign</a>
             </div>
         </div>
     </div>
@@ -66,10 +59,7 @@
                 <a href="{{ route('wallet.index') }}" class="text-xs text-indigo-400 hover:text-indigo-300 font-semibold">View all →</a>
             </div>
             @if($recentTransactions->isEmpty())
-                <div class="text-center py-12 text-slate-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-3 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-                    <p class="text-sm">No transactions yet</p>
-                </div>
+                <div class="text-center py-12 text-slate-500"><p class="text-sm">No transactions yet</p></div>
             @else
                 <div class="space-y-3">
                     @foreach ($recentTransactions as $tx)

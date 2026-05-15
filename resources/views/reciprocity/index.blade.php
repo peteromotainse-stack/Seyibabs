@@ -11,11 +11,11 @@
         </div>
         <div class="flex items-center gap-3">
             <div class="glass px-4 py-2 rounded-xl flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                 <span class="text-sm font-bold text-white">{{ number_format($user->points) }} pts</span>
             </div>
             @if($user->warnings > 0)
-            <form method="POST" action="{{ route('reciprocity.appeal') }}">@csrf
+            <form method="POST" action="{{ route('reciprocity.appeal') }}">
+                @csrf
                 <button type="submit" class="flex items-center gap-2 px-4 py-2 bg-rose-600/20 hover:bg-rose-600/30 border border-rose-500/30 text-rose-400 rounded-xl text-sm font-bold transition-all">
                     Appeal Warning ({{ $user->warnings }})
                 </button>
@@ -55,15 +55,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-amber-500/10 text-amber-500 border border-amber-500/20 text-[10px] font-black px-3 py-1.5 rounded-full flex items-center gap-1.5">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                        +10 pts
-                    </div>
+                    <div class="bg-amber-500/10 text-amber-500 border border-amber-500/20 text-[10px] font-black px-3 py-1.5 rounded-full">+10 pts</div>
                 </div>
                 <p class="text-sm text-slate-400 mb-5 line-clamp-2 leading-relaxed">{{ $task->description }}</p>
                 <div class="space-y-2 mb-6">
                     <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                        <span>Community Progress</span><span>{{ $task->total_slots - $task->remaining_slots }} / {{ $task->total_slots }}</span>
+                        <span>Community Progress</span>
+                        <span>{{ $task->total_slots - $task->remaining_slots }} / {{ $task->total_slots }}</span>
                     </div>
                     <div class="h-1.5 w-full bg-slate-800/50 rounded-full overflow-hidden">
                         @php $progress = $task->total_slots > 0 ? (1 - $task->remaining_slots / $task->total_slots) * 100 : 0; @endphp
@@ -72,25 +70,19 @@
                 </div>
                 <div class="flex gap-3">
                     <a href="{{ $task->link }}" target="_blank" rel="noopener noreferrer"
-                       class="flex-1 flex items-center justify-center gap-2 bg-slate-800/50 hover:bg-slate-800 text-slate-300 py-3.5 rounded-2xl text-xs font-bold border border-slate-700/50 transition-all">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                        Open
-                    </a>
-                    <form method="POST" action="{{ route('reciprocity.complete', $task) }}" class="flex-1">@csrf
-                        <button type="submit" class="w-full flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white py-3.5 rounded-2xl text-xs font-bold shadow-lg shadow-indigo-600/20 transition-all">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            Done +10pts
-                        </button>
+                       class="flex-1 flex items-center justify-center gap-2 bg-slate-800/50 hover:bg-slate-800 text-slate-300 py-3.5 rounded-2xl text-xs font-bold border border-slate-700/50 transition-all">Open</a>
+                    <form method="POST" action="{{ route('reciprocity.complete', $task) }}" class="flex-1">
+                        @csrf
+                        <button type="submit" class="w-full flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white py-3.5 rounded-2xl text-xs font-bold shadow-lg shadow-indigo-600/20 transition-all">Done +10pts</button>
                     </form>
-                    <form method="POST" action="{{ route('reciprocity.ignore', $task) }}">@csrf
-                        <button type="submit" onclick="return confirm('Ignoring will apply a -50 points penalty. Continue?')" title="Ignore (penalty applies)"
-                                class="px-3 py-3.5 rounded-2xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 text-rose-400 text-xs font-bold transition-all">
+                    <form method="POST" action="{{ route('reciprocity.ignore', $task) }}">
+                        @csrf
+                        <button type="submit" title="Ignore (penalty applies)"
+                                class="px-3 py-3.5 rounded-2xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 text-rose-400 text-xs font-bold transition-all"
+                                onclick="return confirm('Ignoring will apply a -50 points penalty. Continue?')">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                         </button>
                     </form>
-                </div>
-                <div class="mt-4 pt-3 border-t border-slate-800/30 flex items-center justify-center gap-2">
-                    <span class="text-[8px] font-black text-slate-500 uppercase tracking-widest">Mutual Reciprocity Active</span>
                 </div>
             </div>
             @endforeach
