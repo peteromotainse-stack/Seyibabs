@@ -47,9 +47,9 @@ class DatabaseSeeder extends Seeder
             SocialHandle::create(array_merge($handle, ['user_id' => $bubee->id]));
         }
 
-        Transaction::create(['user_id' => $bubee->id, 'type' => 'Earning',       'amount' => 2.50,  'description' => 'Campaign Reward: YouTube View',    'status' => 'Completed']);
-        Transaction::create(['user_id' => $bubee->id, 'type' => 'Withdrawal',    'amount' => 50.00, 'description' => 'Bank Transfer',                    'status' => 'Completed']);
-        Transaction::create(['user_id' => $bubee->id, 'type' => 'Campaign_Spend','amount' => 10.00, 'description' => 'New Campaign: Instagram Like',      'status' => 'Completed']);
+        Transaction::create(['user_id' => $bubee->id, 'type' => 'Earning',        'amount' => 2.50,  'description' => 'Campaign Reward: YouTube View',  'status' => 'Completed']);
+        Transaction::create(['user_id' => $bubee->id, 'type' => 'Withdrawal',     'amount' => 50.00, 'description' => 'Bank Transfer',                  'status' => 'Completed']);
+        Transaction::create(['user_id' => $bubee->id, 'type' => 'Campaign_Spend', 'amount' => 10.00, 'description' => 'New Campaign: Instagram Like',    'status' => 'Completed']);
 
         $members = [
             ['name' => 'Elena Gilbert',   'username' => 'elenag',    'seed' => 'elena',   'status' => 'ACTIVE',   'elite' => true,  'points' => 4500, 'interests' => ['Tech','Gadgets','Lifestyle']],
@@ -83,18 +83,17 @@ class DatabaseSeeder extends Seeder
                 'visibility_score'  => rand(40, 95),
                 'engagement_rate'   => rand(5, 20),
             ]);
-
             foreach ($memberHandles[$m['username']] ?? [] as [$platform, $handle]) {
                 SocialHandle::create(['user_id' => $user->id, 'platform' => $platform, 'handle' => $handle]);
             }
         }
 
-        $alexUser = User::where('username', 'elenag')->first();
+        $alexUser  = User::where('username', 'elenag')->first();
         $brandUser = User::where('username', 'damons')->first();
 
-        Campaign::create(['user_id' => $alexUser->id, 'platform' => 'Instagram', 'action_type' => 'Like',   'link' => 'https://instagram.com/p/123',             'description' => 'Check out my latest travel photography from Bali! Would appreciate the love.', 'total_slots' => 100, 'remaining_slots' => 45,  'reward_type' => 'Points', 'reward_value' => 50,   'campaign_type' => 'Reciprocity', 'creator_interests' => ['Travel','Photography','Lifestyle']]);
-        Campaign::create(['user_id' => $brandUser->id, 'platform' => 'YouTube',  'action_type' => 'View',   'link' => 'https://youtube.com/watch?v=paid-video',   'description' => 'Watch our new product launch video for at least 3 minutes to earn real cash reward!', 'total_slots' => 500, 'remaining_slots' => 240, 'reward_type' => 'Cash',   'reward_value' => 2.50, 'campaign_type' => 'Paid',        'use_ai' => true, 'creator_interests' => ['Tech','Business','Marketing']]);
-        Campaign::create(['user_id' => $alexUser->id, 'platform' => 'YouTube',  'action_type' => 'Play',   'link' => 'https://youtube.com/watch?v=456',           'description' => 'New track just dropped! Please play and stream for at least 60 seconds.', 'total_slots' => 500, 'remaining_slots' => 10,  'reward_type' => 'Points', 'reward_value' => 150,  'campaign_type' => 'Reciprocity', 'creator_interests' => ['Music','Nightlife','Tech']]);
-        Campaign::create(['user_id' => $brandUser->id, 'platform' => 'Twitter',  'action_type' => 'Repost', 'link' => 'https://twitter.com/gamehub/status/123',   'description' => 'Repost our latest giveaway post to win a PS5 and earn instant cash.', 'total_slots' => 100, 'remaining_slots' => 15,  'reward_type' => 'Cash',   'reward_value' => 1.00, 'campaign_type' => 'Paid',        'target_location' => 'USA', 'creator_interests' => ['Gaming','Tech','Entertainment']]);
+        Campaign::create(['user_id' => $alexUser->id,  'platform' => 'Instagram', 'action_type' => 'Like',   'link' => 'https://instagram.com/p/123',              'description' => 'Check out my latest travel photography from Bali! Would appreciate the love.', 'total_slots' => 100, 'remaining_slots' => 45,  'reward_type' => 'Points', 'reward_value' => 50,   'campaign_type' => 'Reciprocity', 'creator_interests' => ['Travel','Photography','Lifestyle']]);
+        Campaign::create(['user_id' => $brandUser->id, 'platform' => 'YouTube',   'action_type' => 'View',   'link' => 'https://youtube.com/watch?v=paid-video',   'description' => 'Watch our new product launch video for at least 3 minutes to earn real cash reward!', 'total_slots' => 500, 'remaining_slots' => 240, 'reward_type' => 'Cash',   'reward_value' => 2.50, 'campaign_type' => 'Paid', 'use_ai' => true, 'creator_interests' => ['Tech','Business','Marketing']]);
+        Campaign::create(['user_id' => $alexUser->id,  'platform' => 'YouTube',   'action_type' => 'Play',   'link' => 'https://youtube.com/watch?v=456',          'description' => 'New track just dropped! Please play and stream for at least 60 seconds.', 'total_slots' => 500, 'remaining_slots' => 10,  'reward_type' => 'Points', 'reward_value' => 150,  'campaign_type' => 'Reciprocity', 'creator_interests' => ['Music','Nightlife','Tech']]);
+        Campaign::create(['user_id' => $brandUser->id, 'platform' => 'Twitter',   'action_type' => 'Repost', 'link' => 'https://twitter.com/gamehub/status/123',   'description' => 'Repost our latest giveaway post to win a PS5 and earn instant cash.', 'total_slots' => 100, 'remaining_slots' => 15,  'reward_type' => 'Cash',   'reward_value' => 1.00, 'campaign_type' => 'Paid', 'target_location' => 'USA', 'creator_interests' => ['Gaming','Tech','Entertainment']]);
     }
 }
