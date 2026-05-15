@@ -25,49 +25,62 @@
             <h1 class="text-2xl font-black text-white">Join Wetaract</h1>
             <p class="text-slate-400 text-sm mt-1">Start growing your social presence today</p>
         </div>
+
         <div class="glass rounded-3xl p-8">
-            <form method="POST" action="{{ route('register') }}" class="space-y-4">@csrf
+            <form method="POST" action="{{ route('register') }}" class="space-y-4">
+                @csrf
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-bold text-slate-400 mb-2 uppercase tracking-wide">Full Name</label>
                         <input type="text" name="name" value="{{ old('name') }}" required autofocus
-                               class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition-colors placeholder-slate-600" placeholder="Your Name">
+                               class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition-colors placeholder-slate-600"
+                               placeholder="Your Name">
                         @error('name')<p class="text-rose-400 text-xs mt-1">{{ $message }}</p>@enderror
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-400 mb-2 uppercase tracking-wide">Username</label>
                         <input type="text" name="username" value="{{ old('username') }}" required
-                               class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition-colors placeholder-slate-600" placeholder="username">
+                               class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition-colors placeholder-slate-600"
+                               placeholder="username">
                         @error('username')<p class="text-rose-400 text-xs mt-1">{{ $message }}</p>@enderror
                     </div>
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-400 mb-2 uppercase tracking-wide">Email</label>
                     <input type="email" name="email" value="{{ old('email') }}" required
-                           class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition-colors placeholder-slate-600" placeholder="you@example.com">
+                           class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition-colors placeholder-slate-600"
+                           placeholder="you@example.com">
                     @error('email')<p class="text-rose-400 text-xs mt-1">{{ $message }}</p>@enderror
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-bold text-slate-400 mb-2 uppercase tracking-wide">Password</label>
                         <input type="password" name="password" required
-                               class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition-colors" placeholder="••••••••">
+                               class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition-colors"
+                               placeholder="••••••••">
                         @error('password')<p class="text-rose-400 text-xs mt-1">{{ $message }}</p>@enderror
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-400 mb-2 uppercase tracking-wide">Confirm</label>
                         <input type="password" name="password_confirmation" required
-                               class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition-colors" placeholder="••••••••">
+                               class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition-colors"
+                               placeholder="••••••••">
                     </div>
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-400 mb-2 uppercase tracking-wide">Referral Code (Optional)</label>
                     <input type="text" name="referral_code" value="{{ old('referral_code', request('ref')) }}"
-                           class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-fuchsia-500 transition-colors placeholder-slate-600 font-mono" placeholder="XXXXXXXX">
+                           class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-fuchsia-500 transition-colors placeholder-slate-600 font-mono"
+                           placeholder="XXXXXXXX">
                 </div>
-                <button type="submit" class="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-black rounded-2xl text-sm transition-all shadow-lg shadow-indigo-600/20">Create Account – It's Free</button>
+                <button type="submit" class="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-black rounded-2xl text-sm transition-all shadow-lg shadow-indigo-600/20">
+                    Create Account – It's Free
+                </button>
             </form>
-            <p class="text-center text-sm text-slate-500 mt-6">Already have an account? <a href="{{ route('login') }}" class="text-indigo-400 hover:text-indigo-300 font-bold">Sign in</a></p>
+            <p class="text-center text-sm text-slate-500 mt-6">
+                Already have an account?
+                <a href="{{ route('login') }}" class="text-indigo-400 hover:text-indigo-300 font-bold">Sign in</a>
+            </p>
         </div>
         <div class="text-center mt-6">
             <p class="text-xs text-slate-500">You'll receive <span class="text-amber-400 font-bold">100 bonus points</span> upon registration!</p>

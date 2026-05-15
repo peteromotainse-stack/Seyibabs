@@ -25,21 +25,26 @@
             <h1 class="text-2xl font-black text-white">Welcome back</h1>
             <p class="text-slate-400 text-sm mt-1">Sign in to your Social Growth Ecosystem</p>
         </div>
+
         <div class="glass rounded-3xl p-8">
             @if (session('status'))
                 <div class="mb-4 p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 text-sm">{{ session('status') }}</div>
             @endif
-            <form method="POST" action="{{ route('login') }}" class="space-y-5">@csrf
+
+            <form method="POST" action="{{ route('login') }}" class="space-y-5">
+                @csrf
                 <div>
                     <label class="block text-xs font-bold text-slate-400 mb-2 uppercase tracking-wide">Email</label>
                     <input type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="email"
-                           class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition-colors placeholder-slate-600" placeholder="you@example.com">
+                           class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition-colors placeholder-slate-600"
+                           placeholder="you@example.com">
                     @error('email')<p class="text-rose-400 text-xs mt-1">{{ $message }}</p>@enderror
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-400 mb-2 uppercase tracking-wide">Password</label>
                     <input type="password" name="password" required autocomplete="current-password"
-                           class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition-colors" placeholder="••••••••">
+                           class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition-colors"
+                           placeholder="••••••••">
                     @error('password')<p class="text-rose-400 text-xs mt-1">{{ $message }}</p>@enderror
                 </div>
                 <div class="flex items-center justify-between">
@@ -51,9 +56,15 @@
                         <a href="{{ route('password.request') }}" class="text-sm text-indigo-400 hover:text-indigo-300">Forgot password?</a>
                     @endif
                 </div>
-                <button type="submit" class="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-black rounded-2xl text-sm transition-all shadow-lg shadow-indigo-600/20">Sign In</button>
+                <button type="submit" class="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-black rounded-2xl text-sm transition-all shadow-lg shadow-indigo-600/20">
+                    Sign In
+                </button>
             </form>
-            <p class="text-center text-sm text-slate-500 mt-6">Don't have an account? <a href="{{ route('register') }}" class="text-indigo-400 hover:text-indigo-300 font-bold">Sign up free</a></p>
+
+            <p class="text-center text-sm text-slate-500 mt-6">
+                Don't have an account?
+                <a href="{{ route('register') }}" class="text-indigo-400 hover:text-indigo-300 font-bold">Sign up free</a>
+            </p>
         </div>
     </div>
 </body>
