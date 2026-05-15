@@ -16,14 +16,27 @@
                         <p class="text-xs text-slate-500 mb-1">Your Referral Code</p>
                         <p class="text-xl font-mono font-black text-fuchsia-400">{{ $user->referral_code ?? 'N/A' }}</p>
                     </div>
-                    <button onclick="copyCode('{{ $user->referral_code }}')" class="px-5 py-4 bg-fuchsia-600 hover:bg-fuchsia-500 text-white rounded-xl font-bold text-sm transition-all">Copy</button>
+                    <button onclick="copyCode('{{ $user->referral_code }}')"
+                            class="px-5 py-4 bg-fuchsia-600 hover:bg-fuchsia-500 text-white rounded-xl font-bold text-sm transition-all">Copy</button>
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-4">
-                <div class="bg-slate-900/60 rounded-2xl p-5 text-center border border-slate-800"><p class="text-3xl font-black text-white">{{ $user->total_referrals }}</p><p class="text-xs text-slate-500 mt-1">Total Referrals</p></div>
-                <div class="bg-slate-900/60 rounded-2xl p-5 text-center border border-slate-800"><p class="text-3xl font-black text-emerald-400">${{ number_format($user->referral_earnings, 2) }}</p><p class="text-xs text-slate-500 mt-1">Total Earnings</p></div>
-                <div class="bg-slate-900/60 rounded-2xl p-5 text-center border border-slate-800"><p class="text-3xl font-black text-amber-400">${{ number_format($user->referral_pending, 2) }}</p><p class="text-xs text-slate-500 mt-1">Pending</p></div>
-                <div class="bg-slate-900/60 rounded-2xl p-5 text-center border border-slate-800"><p class="text-3xl font-black text-indigo-400">{{ $user->referral_conversion_rate }}</p><p class="text-xs text-slate-500 mt-1">Conversion Rate</p></div>
+                <div class="bg-slate-900/60 rounded-2xl p-5 text-center border border-slate-800">
+                    <p class="text-3xl font-black text-white">{{ $user->total_referrals }}</p>
+                    <p class="text-xs text-slate-500 mt-1">Total Referrals</p>
+                </div>
+                <div class="bg-slate-900/60 rounded-2xl p-5 text-center border border-slate-800">
+                    <p class="text-3xl font-black text-emerald-400">${{ number_format($user->referral_earnings, 2) }}</p>
+                    <p class="text-xs text-slate-500 mt-1">Total Earnings</p>
+                </div>
+                <div class="bg-slate-900/60 rounded-2xl p-5 text-center border border-slate-800">
+                    <p class="text-3xl font-black text-amber-400">${{ number_format($user->referral_pending, 2) }}</p>
+                    <p class="text-xs text-slate-500 mt-1">Pending</p>
+                </div>
+                <div class="bg-slate-900/60 rounded-2xl p-5 text-center border border-slate-800">
+                    <p class="text-3xl font-black text-indigo-400">{{ $user->referral_conversion_rate }}</p>
+                    <p class="text-xs text-slate-500 mt-1">Conversion Rate</p>
+                </div>
             </div>
         </div>
     </div>
@@ -36,24 +49,30 @@
             <button onclick="copyLink()" class="px-5 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold text-sm transition-all">Copy Link</button>
         </div>
         <div class="flex gap-3 flex-wrap">
-            <a href="https://wa.me/?text={{ urlencode('Join Wetaract and earn money! Use my referral code: ' . $user->referral_code . ' or sign up at ' . url('/register?ref=' . $user->referral_code)) }}" target="_blank"
-               class="flex items-center gap-2 px-4 py-2.5 bg-green-600 hover:bg-green-500 text-white rounded-xl text-sm font-bold transition-all">WhatsApp</a>
-            <a href="https://twitter.com/intent/tweet?text={{ urlencode('Join Wetaract – earn money by engaging on social media! Use my code: ' . $user->referral_code) }}" target="_blank"
-               class="flex items-center gap-2 px-4 py-2.5 bg-blue-500 hover:bg-blue-400 text-white rounded-xl text-sm font-bold transition-all">Twitter / X</a>
+            <a href="https://wa.me/?text={{ urlencode('Join Wetaract and earn money! Use my referral code: ' . $user->referral_code . ' or sign up at ' . url('/register?ref=' . $user->referral_code)) }}"
+               target="_blank" class="flex items-center gap-2 px-4 py-2.5 bg-green-600 hover:bg-green-500 text-white rounded-xl text-sm font-bold transition-all">WhatsApp</a>
+            <a href="https://twitter.com/intent/tweet?text={{ urlencode('Join Wetaract – earn money by engaging on social media! Use my code: ' . $user->referral_code) }}"
+               target="_blank" class="flex items-center gap-2 px-4 py-2.5 bg-blue-500 hover:bg-blue-400 text-white rounded-xl text-sm font-bold transition-all">Twitter / X</a>
         </div>
     </div>
 
     <div class="glass rounded-3xl p-6">
         <h3 class="text-base font-bold text-white mb-6">Referred Members ({{ $referredUsers->count() }})</h3>
         @if($referredUsers->isEmpty())
-            <div class="text-center py-12 text-slate-500"><p class="text-sm">No referrals yet. Share your code to start earning!</p></div>
+            <div class="text-center py-12 text-slate-500">
+                <p class="text-sm">No referrals yet. Share your code to start earning!</p>
+            </div>
         @else
             <div class="space-y-3">
                 @foreach ($referredUsers as $referred)
                 <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-900/40">
                     <div class="flex items-center gap-3">
-                        <img src="{{ $referred->avatar ?? 'https://ui-avatars.com/api/?name=' . urlencode($referred->name) . '&background=6366f1&color=fff&size=60' }}" alt="{{ $referred->name }}" class="w-10 h-10 rounded-xl object-cover">
-                        <div><p class="text-sm font-bold text-slate-200">{{ $referred->name }}</p><p class="text-xs text-slate-500">@{{ $referred->username }} · Joined {{ \Carbon\Carbon::parse($referred->created_at)->format('M d, Y') }}</p></div>
+                        <img src="{{ $referred->avatar ?? 'https://ui-avatars.com/api/?name=' . urlencode($referred->name) . '&background=6366f1&color=fff&size=60' }}"
+                             alt="{{ $referred->name }}" class="w-10 h-10 rounded-xl object-cover">
+                        <div>
+                            <p class="text-sm font-bold text-slate-200">{{ $referred->name }}</p>
+                            <p class="text-xs text-slate-500">@{{ $referred->username }} · Joined {{ \Carbon\Carbon::parse($referred->created_at)->format('M d, Y') }}</p>
+                        </div>
                     </div>
                     <span class="text-[10px] font-black px-2 py-1 rounded-full {{ $referred->membership_status === 'ACTIVE' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-slate-800 text-slate-500' }}">
                         {{ $referred->membership_status === 'ACTIVE' ? 'Active' : 'Inactive' }}
@@ -64,6 +83,7 @@
         @endif
     </div>
 </div>
+
 <script>
 function copyCode(code) { navigator.clipboard.writeText(code); alert('Referral code copied: ' + code); }
 function copyLink() { const link = document.getElementById('referral-link').value; navigator.clipboard.writeText(link); alert('Referral link copied!'); }
